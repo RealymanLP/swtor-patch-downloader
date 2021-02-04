@@ -10,6 +10,892 @@ import os
 import zipfile
 import urllib
 import xml.dom.minidom
+import sys
+
+global zeit
+global zeitx
+zeitx = ""
+global sekunden
+sekunden = 0
+yes = False
+
+def bar_progress(current, total, width=80):
+    global zeit
+    global zeitx
+    global sekunden
+    zeit = int(time.time())
+    if not zeit == zeitx:
+        sekunden += 1
+    currentx = int(current)
+    totalx = int(total)
+    leiste =     "  [                                                   ]"
+    if int(currentx / totalx * 100) == 1 or int(currentx / totalx * 100) == 2:
+        leiste = "  [.                                                  ]"
+    if int(currentx / totalx * 100) == 3 or int(currentx / totalx * 100) == 4:
+        leiste = "  [..                                                 ]"
+    if int(currentx / totalx * 100) == 5 or int(currentx / totalx * 100) == 6:
+        leiste = "  [...                                                ]"
+    if int(currentx / totalx * 100) == 7 or int(currentx / totalx * 100) == 8:
+        leiste = "  [....                                               ]"
+    if int(currentx / totalx * 100) == 9:
+        leiste = "  [.....                                              ]"
+    if int(currentx / totalx * 100) == 10:
+        leiste = " [.....                                              ]"
+    if int(currentx / totalx * 100) == 11 or int(currentx / totalx * 100) == 12:
+        leiste = " [......                                             ]"
+    if int(currentx / totalx * 100) == 13 or int(currentx / totalx * 100) == 14:
+        leiste = " [.......                                            ]"
+    if int(currentx / totalx * 100) == 15 or int(currentx / totalx * 100) == 16:
+         leiste = " [........                                          ]"
+    if int(currentx / totalx * 100) == 17 or int(currentx / totalx * 100) == 18:
+        leiste = " [.........                                          ]"
+    if int(currentx / totalx * 100) == 19 or int(currentx / totalx * 100) == 20:
+        leiste = " [..........                                         ]"
+    if int(currentx / totalx * 100) == 21 or int(currentx / totalx * 100) == 22:
+         leiste = " [...........                                       ]"
+    if int(currentx / totalx * 100) == 23 or int(currentx / totalx * 100) == 24:
+        leiste = " [............                                       ]"
+    if int(currentx / totalx * 100) == 25 or int(currentx / totalx * 100) == 26:
+        leiste = " [.............                                      ]"
+    if int(currentx / totalx * 100) == 27 or int(currentx / totalx * 100) == 28:
+        leiste = " [..............                                     ]"
+    if int(currentx / totalx * 100) == 29 or int(currentx / totalx * 100) == 30:
+        leiste = " [...............                                    ]"
+    if int(currentx / totalx * 100) == 31 or int(currentx / totalx * 100) == 32:
+        leiste = " [................                                   ]"
+    if int(currentx / totalx * 100) == 33 or int(currentx / totalx * 100) == 34:
+        leiste = " [.................                                  ]"
+    if int(currentx / totalx * 100) == 35 or int(currentx / totalx * 100) == 36:
+        leiste = " [..................                                 ]"
+    if int(currentx / totalx * 100) == 37 or int(currentx / totalx * 100) == 38:
+        leiste = " [...................                                ]"
+    if int(currentx / totalx * 100) == 39 or int(currentx / totalx * 100) == 40:
+        leiste = " [....................                               ]"
+    if int(currentx / totalx * 100) == 41 or int(currentx / totalx * 100) == 42:
+        leiste = " [.....................                              ]"
+    if int(currentx / totalx * 100) == 43 or int(currentx / totalx * 100) == 44:
+        leiste = " [......................                             ]"
+    if int(currentx / totalx * 100) == 45 or int(currentx / totalx * 100) == 46:
+        leiste = " [.......................                            ]"
+    if int(currentx / totalx * 100) == 47 or int(currentx / totalx * 100) == 48:
+        leiste = " [........................                           ]"
+    if int(currentx / totalx * 100) == 49 or int(currentx / totalx * 100) == 50:
+        leiste = " [.........................                          ]"
+    if int(currentx / totalx * 100) == 51 or int(currentx / totalx * 100) == 52:
+        leiste = " [..........................                         ]"
+    if int(currentx / totalx * 100) == 53 or int(currentx / totalx * 100) == 54:
+        leiste = " [...........................                        ]"
+    if int(currentx / totalx * 100) == 55 or int(currentx / totalx * 100) == 56:
+        leiste = " [............................                       ]"
+    if int(currentx / totalx * 100) == 57 or int(currentx / totalx * 100) == 58:
+        leiste = " [.............................                      ]"
+    if int(currentx / totalx * 100) == 59 or int(currentx / totalx * 100) == 60:
+        leiste = " [..............................                     ]"
+    if int(currentx / totalx * 100) == 61 or int(currentx / totalx * 100) == 62:
+        leiste = " [...............................                    ]"
+    if int(currentx / totalx * 100) == 63 or int(currentx / totalx * 100) == 64:
+        leiste = " [................................                   ]"
+    if int(currentx / totalx * 100) == 65 or int(currentx / totalx * 100) == 66:
+        leiste = " [.................................                  ]"
+    if int(currentx / totalx * 100) == 67 or int(currentx / totalx * 100) == 68:
+        leiste = " [..................................                 ]"
+    if int(currentx / totalx * 100) == 69 or int(currentx / totalx * 100) == 70:
+        leiste = " [...................................                ]"
+    if int(currentx / totalx * 100) == 71 or int(currentx / totalx * 100) == 72:
+        leiste = " [....................................               ]"
+    if int(currentx / totalx * 100) == 73 or int(currentx / totalx * 100) == 74:
+        leiste = " [.....................................              ]"
+    if int(currentx / totalx * 100) == 75 or int(currentx / totalx * 100) == 76:
+        leiste = " [......................................             ]"
+    if int(currentx / totalx * 100) == 77 or int(currentx / totalx * 100) == 78:
+        leiste = " [.......................................            ]"
+    if int(currentx / totalx * 100) == 79 or int(currentx / totalx * 100) == 80:
+        leiste = " [........................................           ]"
+    if int(currentx / totalx * 100) == 81 or int(currentx / totalx * 100) == 82:
+        leiste = " [.........................................          ]"
+    if int(currentx / totalx * 100) == 83 or int(currentx / totalx * 100) == 84:
+        leiste = " [..........................................         ]"
+    if int(currentx / totalx * 100) == 85 or int(currentx / totalx * 100) == 86:
+        leiste = " [...........................................        ]"
+    if int(currentx / totalx * 100) == 87 or int(currentx / totalx * 100) == 88:
+        leiste = " [............................................       ]"
+    if int(currentx / totalx * 100) == 89 or int(currentx / totalx * 100) == 90:
+        leiste = " [.............................................      ]"
+    if int(currentx / totalx * 100) == 91 or int(currentx / totalx * 100) == 92:
+        leiste = " [..............................................     ]"
+    if int(currentx / totalx * 100) == 93 or int(currentx / totalx * 100) == 94:
+        leiste = " [...............................................    ]"
+    if int(currentx / totalx * 100) == 95 or int(currentx / totalx * 100) == 96:
+        leiste = " [................................................   ]"
+    if int(currentx / totalx * 100) == 97 or int(currentx / totalx * 100) == 98:
+        leiste = " [.................................................  ]"
+    if int(currentx / totalx * 100) == 99:
+        leiste = " [.................................................. ]"
+    if int(currentx / totalx * 100) == 100:
+        leiste = "[...................................................]"
+    try:
+        speed = current / sekunden / 1000000
+        speed = str(format(speed, '.2f'))
+    except:
+        speed = 0
+    progress_message = f"{int(currentx / totalx * 100)}% {leiste} {current} / {total} [{speed}mb/s]"
+    sys.stdout.write("\r" + progress_message)
+    sys.stdout.flush()
+    zeitx = zeit
+
+def download_movies(saveloc, lwert, vnummerx, vwert, vnummer):
+    global zeitx
+    global sekunden
+    if not lwert == "client" and not lwert == "main":
+        print(f"Download of {vwert} {lwert} version {vnummerx} started!\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)         
+            if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+    else:
+        print("Please select a language!")
+        try:
+            log1_label.config(text="Please select a language!")
+        except:
+            pass
+        return  
+                        
+def download_movies0(saveloc, lwert, vnummerx, vwert, vnummer):
+    global zeitx
+    global sekunden
+    if not lwert == "client" and not lwert == "main":
+        print(f"Download of {vwert} {lwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)         
+            if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+    else:
+        try:
+            log1_label.config(text="Please select a language!")
+        except:
+            pass
+        print("Please select a language!")
+        return    
+
+def download_files(saveloc, lwert, vnummerx, vwert, vnummer):
+    global zeitx
+    global sekunden
+    if not lwert == "client":
+        print(f"Download of {vwert} {lwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+    if lwert == "client":
+        print(f"Download of {vwert} {lwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+
+def download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, clientid):
+    global zeitx
+    global sekunden
+    if True:
+        print(f"Download of {vwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/retailclient_{clientid}_{vnummerx}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_{vnummerx}/retailclient_{clientid}_{vnummerx}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_{vnummerx}/retailclient_{clientid}_{vnummerx}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/retailclient_{clientid}_{vnummerx}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_{vnummerx}/retailclient_{clientid}_{vnummerx}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_{vnummerx}/retailclient_{clientid}_{vnummerx}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+
+def download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, clientid):
+    global zeitx
+    global sekunden
+    if True:
+        print(f"Download of {vwert} {lwert} version 0to{vnummer} started! ({vnummer})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/retailclient_{clientid}_0to{vnummer}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_0to{vnummer}/retailclient_{clientid}_0to{vnummer}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/{clientid}/swtor/retailclient_{clientid}/retailclient_{clientid}_0to{vnummer}/retailclient_{clientid}_0to{vnummer}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/retailclient_{clientid}_0to{vnummer}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_0to{vnummer}/retailclient_{clientid}_0to{vnummer}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/{clientid}/retailclient_{clientid}/retailclient_{clientid}_0to{vnummer}/retailclient_{clientid}_0to{vnummer}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+
+def download_files0(saveloc, lwert, vnummerx, vwert, vnummer):
+    global zeitx
+    global sekunden
+    if not lwert == "client":
+        print(f"Download of {vwert} {lwert} version 0to{vnummer} started! ({vnummerx})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+    if lwert == "client":
+        print(f"Download of {vwert} {lwert} version 0to{vnummer} started! ({vnummerx})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+
+def download_files_pts(saveloc, lwert, vnummerx, vwert, vnummer):
+    global zeitx
+    global sekunden
+    if not lwert == "client":
+        print(f"Download of {vwert} {lwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+    if lwert == "client":
+        print(f"Download of {vwert} {lwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+
+def download_files0_pts(saveloc, lwert, vnummerx, vwert, vnummer):
+    global zeitx
+    global sekunden
+    if not lwert == "client":
+        print(f"Download of {vwert} {lwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
+    if lwert == "client":
+        print(f"Download of {vwert} {lwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
+        if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.zip") == True:
+            url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.zip"
+            try:
+                zeitx = int(time.time())
+                sekunden = 0
+                wget.download(url, saveloc, bar=bar_progress)
+                print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.zip\n")
+            except KeyboardInterrupt:
+                print("\nYou stopped the download!")
+                return
+            except Exception as ex:
+                exception = type(ex).__name__
+                argumente = str(ex.args)
+                if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                    print("\nNo Connection. Please try again!")
+                    try:
+                        log1_label.config(text="No connection.\nPlease try again!")
+                    except:
+                        pass
+                    return
+                else:
+                    try:
+                        log1_label.config(text="Version not found!")
+                    except:
+                        pass
+                    print("\nVersion not found!\n")
+                    return
+        c = 0
+        while True:
+            c = int(c)+1
+            if c < 10:
+                c = "0" + str(c)
+            if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z{c}") == True:
+                url2 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z{c}"
+                while True:
+                    try:
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url2, saveloc, bar=bar_progress)
+                        print(f"\nDownloaded: http://cdn-patch.publictest.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z{c}\n")
+                        break
+                    except KeyboardInterrupt:
+                        print("\nYou stopped the download!")
+                        return
+                    except Exception as ex:
+                        exception = type(ex).__name__
+                        argumente = str(ex.args)
+                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
+                            print("\nConnection lost. Trying again...")
+                            time.sleep(5)
+                        else:
+                            try:
+                                log1_label.config(text="Download finished!")
+                            except:
+                                pass
+                            print("\nDownload finished!\n")
+                            return
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 dirs = os.listdir(dir_path)
@@ -25,6 +911,153 @@ for item in dirs:
     if item.endswith(".solidpkg"):
         os.remove(os.path.join(dir_path, item))
 
+if len(sys.argv) > 1:
+    for i in sys.argv:
+        if i.lower() == "live":
+            vwert = "live"
+        if i.lower() == "pts":
+            vwert = "PTS"
+        if i.lower() == "movies":
+            vwert = "movies"
+        if i.lower() == "liveqatest":
+            vwert = "liveqatest"
+        if i.lower() == "betatest":
+            vwert = "betatest"
+        if i.lower() == "cstraining":
+            vwert = "cstraining"
+        if i.lower() == "liveeptest":
+            vwert = "liveeptest"
+
+        if i.lower() == "ft=main":
+            lwert = "main"
+        if i.lower() == "ft=client":
+            lwert = "client"
+        if i.lower() == "ft=de_de":
+            lwert = "de_de"
+        if i.lower() == "ft=en_us":
+            lwert = "en_us"
+        if i.lower() == "ft=fr_fr":
+            lwert = "fr_fr"
+
+        if i.lower() == "pv=xtoy":
+            uwert = "XtoY"
+        if i.lower() == "pv=0toy":
+            uwert = "0toY"
+
+        if i.lower().startswith("save="):
+            saveloc = i.lower().replace("save=","")
+
+        if i.lower().startswith("version="):
+            i = i.lower().replace("version=","")
+            if "-" in i.lower():
+                ij = i.split("-")
+                v1 = int(ij[0])
+                v2 = int(ij[1])
+                for j in range(v1, v2+1):
+                    if uwert == "XtoY":
+                        vnummerx = f"{int(j)-1}to{j}"
+                        vnummer = j
+                        if vwert == "live":
+                            download_files(saveloc, lwert, vnummerx, vwert, vnummer)
+                        if vwert == "PTS":
+                            download_files_pts(saveloc, lwert, vnummerx, vwert, vnummer)
+                        if vwert == "movies":
+                            download_movies(saveloc, lwert, vnummerx, vwert, vnummer)
+                        if vwert == "liveqatest":
+                            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                        if vwert == "betatest":
+                            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                        if vwert == "cstraining":
+                            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                        if vwert == "liveeptest":
+                            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                    if uwert == "0toY":
+                        vnummer = j
+                        vnummerx = j
+                        if vwert == "live":
+                            download_files0(saveloc, lwert, vnummerx, vwert, vnummer)
+                        if vwert == "PTS":
+                            download_files0_pts(saveloc, lwert, vnummerx, vwert, vnummer)
+                        if vwert == "movies":
+                            download_movies0(saveloc, lwert, vnummerx, vwert, vnummer)
+                        if vwert == "liveqatest":
+                            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                        if vwert == "betatest":
+                            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                        if vwert == "cstraining":
+                            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                        if vwert == "liveeptest":
+                            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                print("\n\nAll downloads finished!")
+                sys.exit()
+            else:
+                if uwert == "XtoY":
+                    vnummerx = f"{int(i)-1}to{i}"
+                    vnummer = i
+                if uwert == "0toY":
+                    vnummer = i
+                    vnummerx = i
+    try:
+        if vwert == "PTS":
+            if uwert == "XtoY":
+                download_files_pts(saveloc, lwert, vnummerx, vwert, vnummer)
+                sys.exit()
+            if uwert == "0toY":
+                download_files0_pts(saveloc, lwert, vnummerx, vwert, vnummer)
+                sys.exit()
+        if vwert == "movies":
+            if uwert == "XtoY":
+                download_movies(saveloc, lwert, vnummerx, vwert, vnummer)
+                sys.exit()
+            if uwert == "0toY":
+                download_movies0(saveloc, lwert, vnummerx, vwert, vnummer)
+                sys.exit()
+        if vwert == "live":
+            if uwert == "XtoY":
+                download_files(saveloc, lwert, vnummerx, vwert, vnummer)
+                sys.exit()
+            if uwert == "0toY":
+                download_files0(saveloc, lwert, vnummerx, vwert, vnummer)
+                sys.exit()
+        if vwert == "liveqatest":
+            if uwert == "0toY":
+                download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+            if uwert == "XtoY":
+                download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+        if vwert == "betatest":
+            if uwert == "0toY":
+                download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+            if uwert == "XtoY":
+                download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+        if vwert == "cstraining":
+            if uwert == "0toY":
+                download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+            if uwert == "XtoY":
+                download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+        if vwert == "liveeptest":
+            if uwert == "0toY":
+                download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+            if uwert == "XtoY":
+                download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+                sys.exit()
+        sys.exit()
+    except:
+        print(f"{os.path.basename(sys.argv[0])} [live/pts/movies/liveqatest/betatest/cstraining/liveeptest] [ft=] [pv=] [save=] [version=]"
+              "\n\n"
+              "SWTOR Patch Downloader\n"
+              "ft - main/client/en_us/de_de/fr_fr\n"
+              "pv - XtoY/0toY\n"
+              "save - Location to save (use / instead of \\)\n"
+              "version - The version ID, you want to download; to download more than one, use startversion-endversion (like 330-340)\n\n"
+              f"Example: {os.path.basename(sys.argv[0])} live ft=main pv=xtoy save=d:/temp version=230-233")
+        sys.exit()
 #data = {}
 #data['version'] = []
 #data['version'].append({
@@ -53,6 +1086,8 @@ for item in dirs:
 print("SWTOR Patch Downloader\n")
 
 def dl_man():
+    global zeitx
+    global sekunden
     vwert = varA.get()
     uwert = varB.get()
     lwert = varC.get()
@@ -267,7 +1302,9 @@ def dl_man():
                 url = f"http://manifest.swtor.com/patch/assets_swtor_test_{lwert}.patchmanifest"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://manifest.swtor.com/patch/assets_swtor_test_{lwert}.patchmanifest\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -292,7 +1329,9 @@ def dl_man():
                 url = f"http://manifest.swtor.com/patch/retailclient_publictest.patchmanifest"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://manifest.swtor.com/patch/retailclient_publictest.patchmanifest\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -317,7 +1356,9 @@ def dl_man():
                 url = f"http://manifest.swtor.com/patch/assets_swtor_{lwert}.patchmanifest"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://manifest.swtor.com/patch/assets_swtor_{lwert}.patchmanifest\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -342,7 +1383,9 @@ def dl_man():
                 url = f"http://manifest.swtor.com/patch/retailclient_swtor.patchmanifest"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://manifest.swtor.com/patch/retailclient_swtor.patchmanifest\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -368,7 +1411,9 @@ def dl_man():
                 url = f"http://manifest.swtor.com/patch/movies_{lwert}.patchmanifest"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://manifest.swtor.com/patch/movies_{lwert}.patchmanifest\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -395,7 +1440,9 @@ def dl_man():
         if not os.path.exists(f"{saveloc}/retailclient_liveqatest.patchmanifest") == True:
             while True:
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                     print(f"\nDownloaded: http://manifest.swtor.com/patch/retailclient_liveqatest.patchmanifest\n")
                     log1_label.config(text="Download finished!")
                     print("Download finished!\n")
@@ -420,7 +1467,9 @@ def dl_man():
         if not os.path.exists(f"{saveloc}/retailclient_betatest.patchmanifest") == True:
             while True:
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                     print(f"\nDownloaded: http://manifest.swtor.com/patch/retailclient_betatest.patchmanifest\n")
                     log1_label.config(text="Download finished!")
                     print("Download finished!\n")
@@ -445,7 +1494,9 @@ def dl_man():
         if not os.path.exists(f"{saveloc}/retailclient_cstraining.patchmanifest") == True:
             while True:
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                     print(f"\nDownloaded: http://manifest.swtor.com/patch/retailclient_cstraining.patchmanifest\n")
                     log1_label.config(text="Download finished!")
                     print("Download finished!\n")
@@ -470,7 +1521,9 @@ def dl_man():
         if not os.path.exists(f"{saveloc}/retailclient_liveeptest.patchmanifest") == True:
             while True:
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                     print(f"\nDownloaded: http://manifest.swtor.com/patch/retailclient_liveeptest.patchmanifest\n")
                     log1_label.config(text="Download finished!")
                     print("Download finished!\n")
@@ -491,6 +1544,8 @@ def dl_man():
             print("\nFile already exists!\n")
 
 def dl_solid():
+    global zeitx
+    global sekunden
     vwert = varA.get()
     uwert = varB.get()
     lwert = varC.get()
@@ -742,7 +1797,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -770,7 +1827,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -799,7 +1858,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -827,7 +1888,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -860,7 +1923,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -888,7 +1953,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -917,7 +1984,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -945,7 +2014,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -975,7 +2046,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -1003,7 +2076,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -1032,7 +2107,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -1060,7 +2137,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -1089,7 +2168,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1118,7 +2199,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1148,7 +2231,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1177,7 +2262,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1207,7 +2294,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1236,7 +2325,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1266,7 +2357,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1295,7 +2388,9 @@ def dl_solid():
                 url = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}.solidpkg"
                 while True:
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                         print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}.solidpkg\n")
                         log1_label.config(text="Download finished!")
                         print("Download finished!\n")
@@ -1325,7 +2420,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -1356,7 +2453,9 @@ def dl_solid():
                     url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}.solidpkg"
                     while True:
                         try:
-                            wget.download(url, saveloc)
+                            zeitx = int(time.time())
+                            sekunden = 0
+                            wget.download(url, saveloc, bar=bar_progress)
                             print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}.solidpkg\n")
                             log1_label.config(text="Download finished!")
                             print("Download finished!\n")
@@ -1383,6 +2482,8 @@ def dl_solid():
                 log1_label.config(text="Please select a language!")
 
 def check_date():
+    global zeitx
+    global sekunden
     vwert = varA.get()
     uwert = varB.get()
     lwert = varC.get()
@@ -1632,7 +2733,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1659,7 +2762,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1680,7 +2785,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1707,7 +2814,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1729,7 +2838,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.zip"
                     try:
-                        wget.download(url, saveloc)      
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)      
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1757,7 +2868,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1784,7 +2897,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1806,7 +2921,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip"
                     try:
-                        wget.download(url, saveloc)        
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)        
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1833,7 +2950,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1854,7 +2973,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1881,7 +3002,9 @@ def check_date():
                 if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.zip") == True:
                     url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.zip"
                     try:
-                        wget.download(url, saveloc)
+                        zeitx = int(time.time())
+                        sekunden = 0
+                        wget.download(url, saveloc, bar=bar_progress)
                     except Exception as ex:
                         exception = type(ex).__name__
                         argumente = str(ex.args)
@@ -1902,8 +3025,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.zip"
                 try:
-                    print(url)
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -1923,7 +3047,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -1944,7 +3070,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -1964,7 +3092,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -1985,7 +3115,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -2005,7 +3137,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -2026,7 +3160,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -2046,7 +3182,9 @@ def check_date():
             if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.zip") == True:
                 url = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.zip"
                 try:
-                    wget.download(url, saveloc)
+                    zeitx = int(time.time())
+                    sekunden = 0
+                    wget.download(url, saveloc, bar=bar_progress)
                 except Exception as ex:
                     exception = type(ex).__name__
                     argumente = str(ex.args)
@@ -2064,6 +3202,8 @@ def check_date():
             log1_label.config(text="File created on: " + str(x[2]) + "." + str(x[1]) + "." + str(x[0]))
 
 def file_save():
+    global zeitx
+    global sekunden
     folder_selected = filedialog.askdirectory()
     folder_selected = str(folder_selected)
     folder_selected = folder_selected.replace("\\", "/")
@@ -2072,11 +3212,19 @@ def file_save():
         ordnerzeile.insert(0, folder_selected)
 
 def button_action():
+    global zeitx
+    global sekunden
     vwert = varA.get()
     uwert = varB.get()
     lwert = varC.get()
     vnummer = eingabefeld.get()
     saveloc = ordnerzeile.get()
+    print(saveloc)
+    if not os.path.isdir(saveloc):
+        try:
+            os.makedirs(saveloc)
+        except Exception as e:
+            print(e)
     yes = False
     if vnummer == "":
         log1_label.config(text="Please enter the version number,\nyou want to download!")
@@ -2314,9327 +3462,63 @@ def button_action():
         if uwert == "XtoY":
             vnummer1 = int(vnummer2) - 1
             vnummerx = f"{vnummer1}to{vnummer2}"
-        if uwert == "XtoY":
-            if not lwert == "client":
-                print(f"Download of {vwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!xy")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            if lwert == "client":
-                print(f"Download of {vwert} {lwert} version {vnummerx} started! ({vnummer})\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
+            download_files(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
         if uwert == "0toY":
-            if not lwert == "client":
-                print(f"Download of {vwert} version 0to{vnummer2} started! ({vnummer})\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer2}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer2}/assets_swtor_{lwert}_0to{vnummer2}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            if lwert == "client":
-                print(f"Download of {vwert} {lwert} version 0to{vnummer2} started! ({vnummer})\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer2}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer2}/retailclient_swtor_0to{vnummer2}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
+            download_files0(saveloc, lwert, vnummer, vwert, vnummer2)
+            return
     
     vnummer2 = int(vnummer) -1
     vnummerx = str(vnummer2) + "to" + str(vnummer)
     if vwert == "PTS":
         if uwert == "XtoY":
-            if not lwert == "client":
-                print(f"Download of {vwert} {lwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        print(ex)
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_{vnummerx}/assets_swtor_test_{lwert}_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            if lwert == "client":
-                print(f"Download of {vwert} {lwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_{vnummerx}/retailclient_publictest_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
+            download_files_pts(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
         if uwert == "0toY":
-            if not lwert == "client":
-                print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_0to{vnummer}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_test_{lwert}/assets_swtor_test_{lwert}_0to{vnummer}/assets_swtor_test_{lwert}_0to{vnummer}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            if lwert == "client":
-                print(f"Download of {vwert} {lwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_publictest_0to{vnummer}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_publictest_0to{vnummer}/retailclient_publictest_0to{vnummer}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
+            download_files0_pts(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
     if vwert == "movies":
         if uwert == "XtoY":
-            if not lwert == "client" and not lwert == "main":
-                print(f"Download of {vwert} {lwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_test_{lwert}_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_{vnummerx}/movies_{lwert}_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            else:
-                log1_label.config(text="Please select a language!")
+            download_movies(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
         if uwert == "0toY":
-            if not lwert == "client" and not lwert == "main":
-                print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/movies_{lwert}_0to{vnummer}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/movies_{lwert}/movies_{lwert}_0to{vnummer}/movies_{lwert}_0to{vnummer}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            else:
-                log1_label.config(text="Please select a language!")
+            download_movies0(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
     if vwert == "Live":
         if uwert == "XtoY":
-            if not lwert == "client":
-                print(f"Download of {vwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!xy")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_{vnummerx}/assets_swtor_{lwert}_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            if lwert == "client":
-                print(f"Download of {vwert} {lwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_{vnummerx}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/publictest/retailclient_publictest/retailclient_swtor_{vnummerx}/retailclient_swtor_{vnummerx}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
+            download_files(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
         if uwert == "0toY":
-            if not lwert == "client":
-                print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/assets_swtor_{lwert}_0to{vnummer}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/assets_swtor_{lwert}/assets_swtor_{lwert}_0to{vnummer}/assets_swtor_{lwert}_0to{vnummer}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
-            if lwert == "client":
-                print(f"Download of {vwert} {lwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.zip") == True:
-                    url = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.zip"
-                    try:
-                        wget.download(url, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.zip\n")
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nNo Connection. Please try again!")
-                            log1_label.config(text="No connection.\nPlease try again!")
-                            return
-                        else:
-                            log1_label.config(text="Version not found!")
-                            print("\nVersion not found!\n")
-                            return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z01") == True:
-                    url2 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z01"
-                    while True:
-                        try:
-                            wget.download(url2, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z01\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z02") == True:
-                    url3 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z02"
-                    while True:
-                        try:
-                            wget.download(url3, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z02\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z03") == True:
-                    url4 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z03"
-                    while True:
-                        try:
-                            wget.download(url4, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z03\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z04") == True:
-                    url5 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z04"
-                    while True:
-                        try:
-                            wget.download(url5, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z04\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z05") == True:
-                    url6 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z05"
-                    while True:
-                        try:
-                            wget.download(url6, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z05\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z06") == True:
-                    url7 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z06"
-                    while True:
-                        try:
-                            wget.download(url7, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z06\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z07") == True:
-                    url8 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z07"
-                    while True:
-                        try:
-                            wget.download(url8, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z07\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z08") == True:
-                    url9 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z08"
-                    while True:
-                        try:
-                            wget.download(url9, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z08\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z09") == True:
-                    url10 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z09"
-                    while True:
-                        try:
-                            wget.download(url10, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z09\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z10") == True:
-                    url11 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z10"
-                    while True:
-                        try:
-                            wget.download(url11, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z10\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z11") == True:
-                    url12 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z11"
-                    while True:
-                        try:
-                            wget.download(url12, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z11\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z12") == True:
-                    url13 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z12"
-                    while True:
-                        try:
-                            wget.download(url13, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z12\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z13") == True:
-                    url14 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z13"
-                    while True:
-                        try:
-                            wget.download(url14, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z13\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z14") == True:
-                    url15 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z14"
-                    while True:
-                        try:
-                            wget.download(url15, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z14\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z15") == True:
-                    url16 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z15"
-                    while True:
-                        try:
-                            wget.download(url16, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z15\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z16") == True:
-                    url17 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z16"
-                    while True:
-                        try:
-                            wget.download(url17, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z16\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z17") == True:
-                    url18 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z17"
-                    while True:
-                        try:
-                            wget.download(url18, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z17\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z18") == True:
-                    url19 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z18"
-                    while True:
-                        try:
-                            wget.download(url19, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z18\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z19") == True:
-                    url20 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z19"
-                    while True:
-                        try:
-                            wget.download(url20, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z19\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                if not os.path.exists(f"{saveloc}/retailclient_swtor_0to{vnummer}.z20") == True:
-                    url21 = f"http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z20"
-                    while True:
-                        try:
-                            wget.download(url21, saveloc)
-                            print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/swtor/retailclient_swtor/retailclient_swtor_0to{vnummer}/retailclient_swtor_0to{vnummer}.z20\n")
-                            break
-                        except KeyboardInterrupt:
-                            print("\nYou stopped the download!")
-                            return
-                        except Exception as ex:
-                            exception = type(ex).__name__
-                            argumente = str(ex.args)
-                            if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                                print("\nConnection lost. Trying again...")
-                                time.sleep(5)
-                            else:
-                                log1_label.config(text="Download finished!")
-                                print("\nDownload finished!\n")
-                                return
-                log1_label.config(text="Download finished!")
-                print("Download finished!\n")
+            download_files0(saveloc, lwert, vnummerx, vwert, vnummer)
+            return
     if vwert == "liveqatest":
         if uwert == "0toY":
-            print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nNo Connection. Please try again!")
-                        log1_label.config(text="No connection.\nPlease try again!")
-                        return
-                    else:
-                        log1_label.config(text="Version not found!")
-                        print("\nVersion not found!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_0to{vnummer}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_0to{vnummer}/retailclient_liveqatest_0to{vnummer}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
+            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
         if uwert == "XtoY":
-            print(f"Download of {vwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nNo Connection. Please try again!")
-                        log1_label.config(text="No connection.\nPlease try again!")
-                        return
-                    else:
-                        log1_label.config(text="Version not found!")
-                        print("\nVersion not found!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveqatest_{vnummerx}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveqatest/retailclient_liveqatest/retailclient_liveqatest_{vnummerx}/retailclient_liveqatest_{vnummerx}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            log1_label.config(text="Download finished!")
-            print("Download finished!\n")
+            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
     if vwert == "betatest":
         if uwert == "0toY":
-            print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nNo Connection. Please try again!")
-                        log1_label.config(text="No connection.\nPlease try again!")
-                        return
-                    else:
-                        log1_label.config(text="Version not found!")
-                        print("\nVersion not found!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_0to{vnummer}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_0to{vnummer}/retailclient_betatest_0to{vnummer}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
+            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
         if uwert == "XtoY":
-            print(f"Download of {vwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nNo Connection. Please try again!")
-                        log1_label.config(text="No connection.\nPlease try again!")
-                        return
-                    else:
-                        log1_label.config(text="Version not found!")
-                        print("\nVersion not found!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_betatest_{vnummerx}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/betatest/retailclient_betatest/retailclient_betatest_{vnummerx}/retailclient_betatest_{vnummerx}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            log1_label.config(text="Download finished!")
-            print("Download finished!\n")
+            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
     if vwert == "cstraining":
         if uwert == "0toY":
-            print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nNo Connection. Please try again!")
-                        log1_label.config(text="No connection.\nPlease try again!")
-                        return
-                    else:
-                        log1_label.config(text="Version not found!")
-                        print("\nVersion not found!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_0to{vnummer}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_0to{vnummer}/retailclient_cstraining_0to{vnummer}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            log1_label.config(text="Download finished!")
-            print("Download finished!\n")
+            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
         if uwert == "XtoY":
-            print(f"Download of {vwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nNo Connection. Please try again!")
-                        log1_label.config(text="No connection.\nPlease try again!")
-                        return
-                    else:
-                        log1_label.config(text="Version not found!")
-                        print("\nVersion not found!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_cstraining_{vnummerx}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/cstraining/retailclient_cstraining/retailclient_cstraining_{vnummerx}/retailclient_cstraining_{vnummerx}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            log1_label.config(text="Download finished!")
-            print("Download finished!\n")
+            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
     if vwert == "liveeptest":
         if uwert == "0toY":
-            print(f"Download of {vwert} version 0to{vnummer} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nConnection lost. Trying again...")
-                        time.sleep(5)
-                    else:
-                        log1_label.config(text="Download finished!")
-                        print("\nDownload finished!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_0to{vnummer}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_0to{vnummer}/retailclient_liveeptest_0to{vnummer}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            log1_label.config(text="Download finished!")
-            print("Download finished!\n")
+            download_exp_client0(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
         if uwert == "XtoY":
-            print(f"Download of {vwert} version {vnummerx} started!\nPress CTRL+C to stop.")
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.zip") == True:
-                url = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.zip"
-                try:
-                    wget.download(url, saveloc)
-                    print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.zip\n")
-                except KeyboardInterrupt:
-                    print("\nYou stopped the download!")
-                    return
-                except Exception as ex:
-                    exception = type(ex).__name__
-                    argumente = str(ex.args)
-                    if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                        print("\nConnection lost. Trying again...")
-                        time.sleep(5)
-                    else:
-                        log1_label.config(text="Download finished!")
-                        print("\nDownload finished!\n")
-                        return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z01") == True:
-                url2 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z01"
-                while True:
-                    try:
-                        wget.download(url2, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z01\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z02") == True:
-                url3 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z02"
-                while True:
-                    try:
-                        wget.download(url3, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z02\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z03") == True:
-                url4 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z03"
-                while True:
-                    try:
-                        wget.download(url4, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z03\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z04") == True:
-                url5 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z04"
-                while True:
-                    try:
-                        wget.download(url5, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z04\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z05") == True:
-                url6 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z05"
-                while True:
-                    try:
-                        wget.download(url6, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z05\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z06") == True:
-                url7 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z06"
-                while True:
-                    try:
-                        wget.download(url7, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z06\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z07") == True:
-                url8 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z07"
-                while True:
-                    try:
-                        wget.download(url8, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z07\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z08") == True:
-                url9 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z08"
-                while True:
-                    try:
-                        wget.download(url9, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z08\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z09") == True:
-                url10 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z09"
-                while True:
-                    try:
-                        wget.download(url10, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z09\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z10") == True:
-                url11 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z10"
-                while True:
-                    try:
-                        wget.download(url11, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z10\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z11") == True:
-                url12 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z11"
-                while True:
-                    try:
-                        wget.download(url12, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z11\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z12") == True:
-                url13 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z12"
-                while True:
-                    try:
-                        wget.download(url13, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z12\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z13") == True:
-                url14 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z13"
-                while True:
-                    try:
-                        wget.download(url14, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z13\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z14") == True:
-                url15 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z14"
-                while True:
-                    try:
-                        wget.download(url15, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z14\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z15") == True:
-                url16 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z15"
-                while True:
-                    try:
-                        wget.download(url16, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z15\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z16") == True:
-                url17 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z16"
-                while True:
-                    try:
-                        wget.download(url17, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z16\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z17") == True:
-                url18 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z17"
-                while True:
-                    try:
-                        wget.download(url18, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z17\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z18") == True:
-                url19 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z18"
-                while True:
-                    try:
-                        wget.download(url19, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z18\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z19") == True:
-                url20 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z19"
-                while True:
-                    try:
-                        wget.download(url20, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z19\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            if not os.path.exists(f"{saveloc}/retailclient_liveeptest_{vnummerx}.z20") == True:
-                url21 = f"http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z20"
-                while True:
-                    try:
-                        wget.download(url21, saveloc)
-                        print(f"\nDownloaded: http://cdn-patch.swtor.com/patch/liveeptest/retailclient_liveeptest/retailclient_liveeptest_{vnummerx}/retailclient_liveeptest_{vnummerx}.z20\n")
-                        break
-                    except KeyboardInterrupt:
-                        print("\nYou stopped the download!")
-                        return
-                    except Exception as ex:
-                        exception = type(ex).__name__
-                        argumente = str(ex.args)
-                        if "getaddrinfo failed" in argumente or "Verbindung" in argumente or "connection" in argumente or "Netzwerk" in argumente or "network" in argumente:
-                            print("\nConnection lost. Trying again...")
-                            time.sleep(5)
-                        else:
-                            log1_label.config(text="Download finished!")
-                            print("\nDownload finished!\n")
-                            return
-            log1_label.config(text="Download finished!")
-            print("Download finished!\n")
+            download_exp_client(saveloc, lwert, vnummerx, vwert, vnummer, vwert)
+            return
         
 xml = xml.dom.minidom.parse("patches.xml")
 itemlist = xml.getElementsByTagName('patch')
